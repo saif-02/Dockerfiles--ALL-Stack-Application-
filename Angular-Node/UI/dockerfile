@@ -6,7 +6,7 @@ RUN npm install npm@7.4.0
 RUN npm run build --prod
 FROM nginx:1.19-alpine
 RUN rm -rf /usr/share/nginx/html/*
-COPY --from=builder /app/dist/aida-next /usr/share/nginx/html
+COPY --from=builder /app/dist/* /usr/share/nginx/html
 RUN chmod +x /usr/
 RUN chmod +x /usr/share/
 RUN chmod +x /usr/share/nginx/
