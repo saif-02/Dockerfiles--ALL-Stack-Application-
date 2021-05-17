@@ -15,7 +15,7 @@ Please follow these instructions to deploy this system to live server
 
 2.4. Run
 
-    - docker exex -it chefmaster bash
+    - docker exec -it abcdef bash
 
 2.5. Run
     - php artisan key:generate
@@ -38,4 +38,4 @@ If you need any assistant please message me in freelancer or email me at safifal
 Thanks and Regards
 ------------------
 mysql -h 127.0.0.1 -P 8991 -u root -p
-ssh safi@206.189.24.27 SafiPass@1234
+ssh saif@206.189.24.27 SaifPass@1234
