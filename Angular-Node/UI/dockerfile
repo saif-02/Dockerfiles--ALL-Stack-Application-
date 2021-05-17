@@ -1,0 +1,21 @@
+FROM node:15.5.1-alpine3.10 as builder
+WORKDIR /app
+COPY package.json ./
+COPY . .
+RUN npm install npm@7.4.0
+RUN npm run build --prod
+FROM nginx:1.19-alpine
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /app/dist/aida-next /usr/share/nginx/html
+RUN chmod +x /usr/
+RUN chmod +x /usr/share/
+RUN chmod +x /usr/share/nginx/
+RUN chmod +x /usr/share/nginx/html
+RUN chmod -Rf 777 /usr
+EXPOSE 80
+ADD development/vhost.conf /etc/nginx/conf.d/default.conf
+#ADD development/nginx.conf /etc/nginx/nginx.conf
+COPY development/certs    /etc/nginx/
+
+
+CMD [ "nginx", "-g", "daemon off;"]

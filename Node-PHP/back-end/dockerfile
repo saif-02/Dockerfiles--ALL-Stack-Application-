@@ -1,0 +1,12 @@
+FROM php:7.2-apache
+COPY . /var/www/html/
+ADD development/vhost.conf /etc/apache2/sites-available/000-default.conf
+#COPY development/certs/ /etc/apache2/
+EXPOSE 80
+EXPOSE 443
+RUN a2enmod ssl
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN docker-php-ext-install calendar
+
+
+

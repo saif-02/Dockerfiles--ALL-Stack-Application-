@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  backend:
+    env_file:
+        "./APIs-MySQL/.env"
+    build:
+      context: ./APIs-MySQL/
+      dockerfile: ./dockerfile
+    image: "dmurphy1217/twitter-sentiment-backend"
+    ports:
+      - "3003:3003"
+      - "81:80"
+    volumes:
+      - ./APIs-MySQL/:/app/dist/aida-next:rw
+      - ./APIs-MySQL/development/certs:/etc/nginx/certs/
+  frontend:
+    build:
+      context: ./UI
+      dockerfile: ./dockerfile
+    image: "dmurphy1217/twitter-sentiment-frontend"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./UI/:/app 
+      - ./UI/development/certs:/etc/nginx/certs/
+    links:
+      - "backend:be"
+        
+volumes:
+  APIs-MySQL:
+  UI:
+       
+
+      
+    
+                 
+    
+           
